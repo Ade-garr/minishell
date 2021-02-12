@@ -3,14 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
+#    By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/12 10:29:31 by user42            #+#    #+#              #
-#    Updated: 2021/02/12 12:15:27 by user42           ###   ########.fr        #
+#    Updated: 2021/02/12 16:03:45 by ade-garr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS += ./srcs/main.c
+SRCS += ./srcs/ft_lstadd_back.c
+SRCS += ./srcs/ft_lstlast.c
+SRCS += ./srcs/ft_lstnew.c
+SRCS += ./srcs/ft_lstclear.c
 
 OBJS	= ${SRCS:.c=.o}
 
