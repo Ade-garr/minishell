@@ -6,11 +6,11 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 16:54:12 by ade-garr          #+#    #+#             */
-/*   Updated: 2021/02/12 16:00:50 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/02/12 21:03:37 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
