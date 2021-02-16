@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:38:41 by user42            #+#    #+#             */
-/*   Updated: 2021/02/12 12:02:03 by user42           ###   ########.fr       */
+/*   Updated: 2021/02/16 11:23:09 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,14 @@
 # include <strings.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <stdio.h>
+
+# define BUFFER_SIZE 50
 
 //LIBFT
-
 void				*ft_memset(void *s, int c, size_t n);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
 void				ft_bzero(void *s, size_t n);
@@ -73,11 +78,22 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
 
-//MINISHELL
+///GNL
+int					ft_position(char *left);
+int					ft_free(char **line);
+int					ft_checkleft(char *left);
+size_t				ft_strlen_gnl(const char *s);
+char				*ft_join(char *line, char *left);
+void				ft_moveleft(char *left, char *newleft);
+int					ft_fill_line(int fd, char **line, char (*left)[BUFFER_SIZE + 1]);
+int					ft_give_line(char **line, char *left);
+int					get_next_line(int fd, char **line);
 
+//MINISHELL
 typedef struct		s_shell
 {
 	t_list			*env;
+	char			*line;
 }					t_shell;
 
 #endif

@@ -6,7 +6,7 @@
 #    By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/12 10:29:31 by user42            #+#    #+#              #
-#    Updated: 2021/02/12 16:03:45 by ade-garr         ###   ########.fr        #
+#    Updated: 2021/02/16 10:42:26 by ade-garr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ SRCS += ./srcs/ft_lstadd_back.c
 SRCS += ./srcs/ft_lstlast.c
 SRCS += ./srcs/ft_lstnew.c
 SRCS += ./srcs/ft_lstclear.c
+SRCS += ./srcs/get_next_line.c
+SRCS += ./srcs/get_next_line_utils.c
 
 OBJS	= ${SRCS:.c=.o}
 
