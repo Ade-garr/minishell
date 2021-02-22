@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:38:41 by user42            #+#    #+#             */
-/*   Updated: 2021/02/16 11:23:09 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/02/22 14:26:36 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,21 @@ int					get_next_line(int fd, char **line);
 typedef struct		s_shell
 {
 	t_list			*env;
+	t_list			*cmd;
 	char			*line;
 }					t_shell;
+
+typedef struct		s_cmdinfo
+{
+	int				i;
+	char			**exec;
+	t_list			*dir;
+}					t_cmdinfo;
+
+typedef struct		s_dirinfo
+{
+	int				i;
+	char			*file;
+}					t_dirinfo;
 
 #endif
