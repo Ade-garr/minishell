@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:40:41 by user42            #+#    #+#             */
-/*   Updated: 2021/02/16 11:21:33 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/02/23 12:29:47 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int     main(int argc, char **argv, char **env)
         write(2, "$ ", 2);
         ret = get_next_line(1, &g_shell->line);
         // A COMPLETER
+        ft_exec_cmd();
         if (ret == -1)
             ft_exit();
     }

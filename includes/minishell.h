@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:38:41 by user42            #+#    #+#             */
-/*   Updated: 2021/02/22 14:26:36 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/02/23 13:57:51 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,15 @@ typedef struct		s_dirinfo
 	int				i;
 	char			*file;
 }					t_dirinfo;
+
+	//main.c
+void				get_list_env(char **env);
+void    			init_shell(void);
+void    			ft_exit(void);
+	//execute.c
+void    			ft_exec_cmd(void);
+
+
+
 
 #endif
