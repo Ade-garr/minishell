@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:38:41 by user42            #+#    #+#             */
-/*   Updated: 2021/02/23 13:57:51 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/02/24 13:50:25 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,9 @@ typedef struct		s_shell
 	t_list			*env;
 	t_list			*cmd;
 	char			*line;
+	pid_t			pid_pipe;
+	pid_t			pid_exec;
+	int				pipefd[2];
 }					t_shell;
 
 typedef struct		s_cmdinfo
