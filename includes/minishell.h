@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:38:41 by user42            #+#    #+#             */
-/*   Updated: 2021/02/26 11:28:16 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/02/26 15:39:35 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct		s_shell
 {
 	t_list			*env;
 	t_list			*cmd;
+	t_list			*tmp;
 	char			*line;
 	pid_t			pid_pipe;
 	pid_t			pid_exec;
@@ -123,8 +124,9 @@ int     			main(int argc, char **argv, char **env);
 
 	//execute.c
 void    			ft_exec_cmd(void);
-
-
+void    			ft_process_cmd(void);
+void    			ft_do_pipes(void);
+void    			ft_do_dup_child(void);
 
 
 #endif

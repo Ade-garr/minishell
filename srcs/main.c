@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:40:41 by user42            #+#    #+#             */
-/*   Updated: 2021/02/26 11:27:35 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/02/26 14:17:31 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void    ft_exit(void)
         free(g_shell->line);
         g_shell->line = NULL;
     }
+    /// FREE CMD ET DIR
     free(g_shell);
     g_shell = NULL;
     exit(0);
@@ -41,6 +42,8 @@ void    init_shell(void)
         exit(0);
     g_shell->env = NULL;
     g_shell->line = NULL;
+    g_shell->tmp = NULL;
+    g_shell->cmd = NULL;
 }
 
 void    get_list_env(char **env)
