@@ -6,13 +6,19 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:40:41 by user42            #+#    #+#             */
-/*   Updated: 2021/02/23 12:29:47 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/02/26 11:27:35 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 t_shell *g_shell;
+
+void    ft_error(void)
+{
+    printf("%s\n", strerror(errno));
+    ft_exit();
+}
 
 void    ft_exit(void)
 {

@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:38:41 by user42            #+#    #+#             */
-/*   Updated: 2021/02/24 13:50:25 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/02/26 11:28:16 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <errno.h.>
 
 # define BUFFER_SIZE 50
 
@@ -117,6 +118,9 @@ typedef struct		s_dirinfo
 void				get_list_env(char **env);
 void    			init_shell(void);
 void    			ft_exit(void);
+void    			ft_error(void);
+int     			main(int argc, char **argv, char **env);
+
 	//execute.c
 void    			ft_exec_cmd(void);
 
