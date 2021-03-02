@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:38:41 by user42            #+#    #+#             */
-/*   Updated: 2021/02/26 15:39:35 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/03/02 23:06:10 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stdio.h>
-# include <errno.h.>
+# include <errno.h>
+# include <sys/wait.h>
 
 # define BUFFER_SIZE 50
 
@@ -91,6 +92,7 @@ int					ft_give_line(char **line, char *left);
 int					get_next_line(int fd, char **line);
 
 //MINISHELL
+
 typedef struct		s_shell
 {
 	t_list			*env;
@@ -100,33 +102,36 @@ typedef struct		s_shell
 	pid_t			pid_pipe;
 	pid_t			pid_exec;
 	int				pipefd[2];
+	int				flagparent;
 }					t_shell;
+
+t_shell *g_shell;
 
 typedef struct		s_cmdinfo
 {
-	int				i;
+	int				flagpipe;
 	char			**exec;
 	t_list			*dir;
 }					t_cmdinfo;
 
 typedef struct		s_dirinfo
 {
-	int				i;
+	int				flagdir;
 	char			*file;
 }					t_dirinfo;
 
 	//main.c
 void				get_list_env(char **env);
-void    			init_shell(void);
-void    			ft_exit(void);
-void    			ft_error(void);
-int     			main(int argc, char **argv, char **env);
+void				init_shell(void);
+void				ft_exit(void);
+void				ft_error(void);
+int					main(int argc, char **argv, char **env);
 
 	//execute.c
-void    			ft_exec_cmd(void);
-void    			ft_process_cmd(void);
-void    			ft_do_pipes(void);
-void    			ft_do_dup_child(void);
-
+void				ft_exec_cmd(void);
+void				ft_process_cmd(void);
+void				ft_do_pipes(void);
+void				ft_do_dup_child(void);
+void				ft_do_dup_parent(void);
 
 #endif
