@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:30:22 by ade-garr          #+#    #+#             */
-/*   Updated: 2021/03/02 23:05:35 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/03/03 15:53:25 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_do_dup_parent(void)
 		ft_error();
 	if (dup2(g_shell->pipefd[1], 1) == -1)
 		ft_error();
+	if (close(g_shell->pipefd[1]) == -1)
+		ft_error();
 }
 
 void	ft_do_dup_child(void)
@@ -25,6 +27,8 @@ void	ft_do_dup_child(void)
 	if (close(g_shell->pipefd[1]) == -1)
 		ft_error();
 	if (dup2(g_shell->pipefd[0], 0) == -1)
+		ft_error();
+	if (close(g_shell->pipefd[0]) == -1)
 		ft_error();
 	g_shell->tmp = g_shell->tmp->next;
 	ft_do_pipes();
@@ -55,15 +59,15 @@ void	ft_do_pipes(void)
 void	ft_process_cmd(void)
 {
 	ft_do_pipes();
-	// ft_do_redirections();
+	ft_do_redirections();
 
-	// POUR TEST PIPES
-	int status;
-	write(1, ((t_cmdinfo *)g_shell->tmp->content)->exec[0], 14);
-	if (g_shell->flagparent == 0)
-		ft_exit();
-	wait(&status);
-	// FIN TEST
+	// // POUR TEST PIPES
+	// int status;
+	// write(1, ((t_cmdinfo *)g_shell->tmp->content)->exec[0], 14);
+	// if (g_shell->flagparent == 0)
+	// 	ft_exit();
+	// wait(&status);
+	// // FIN TEST
 }
 
 void	ft_exec_cmd(void)

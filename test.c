@@ -28,16 +28,16 @@ int main()
 	//     return(0);
 	// }
 
-	pid_t   pid;
-	int     a;
-	int		b;
-	int		*ptr;
+	// pid_t   pid;
+	// int     a;
+	// int		b;
+	// int		*ptr;
 
-	a = 0;
-	b = 20;
-	ptr = &a;
-	pid = fork();
-	if (pid == 0)
-		ptr = &b;
-	printf("%d\n", *ptr);
+	// a = 0;
+	// b = 20;
+	// ptr = &a;
+	// pid = fork();
+	// if (pid == 0)
+	// 	ptr = &b;
+	// printf("%d\n", *ptr);
 }

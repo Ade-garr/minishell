@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:38:41 by user42            #+#    #+#             */
-/*   Updated: 2021/03/03 15:30:10 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/03/03 17:41:43 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,13 @@ typedef struct		s_shell
 	t_list			*env;
 	t_list			*cmd;
 	t_list			*tmp;
+	t_list			*tmpdir;
 	char			*line;
 	pid_t			pid_pipe;
 	pid_t			pid_exec;
 	int				pipefd[2];
-	int				flagparent;
+	int				flagparent; // à voir si à garder
+	int				returnvalue; // à voir si à garder
 }					t_shell;
 
 t_shell *g_shell;
@@ -137,5 +139,7 @@ void				ft_do_dup_parent(void);
 	//utils.c
 void				ft_lstclear_env(t_list **lst);
 
+	//redirections.c
+void				ft_do_redirections(void);
 
 #endif
