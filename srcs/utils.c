@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/14 16:54:12 by ade-garr          #+#    #+#             */
-/*   Updated: 2021/03/03 15:24:46 by ade-garr         ###   ########.fr       */
+/*   Created: 2021/03/03 15:28:25 by ade-garr          #+#    #+#             */
+/*   Updated: 2021/03/03 15:29:48 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstclear_env(t_list **lst)
 {
 	t_list	*t;
 
@@ -20,8 +20,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 		return ;
 	while ((*lst))
 	{
-		if (del != NULL)
-			del((*lst)->content);
 		t = *lst;
 		*lst = (*lst)->next;
 		free(t);

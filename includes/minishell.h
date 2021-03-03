@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:38:41 by user42            #+#    #+#             */
-/*   Updated: 2021/03/02 23:06:10 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/03/03 15:30:10 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,5 +133,9 @@ void				ft_process_cmd(void);
 void				ft_do_pipes(void);
 void				ft_do_dup_child(void);
 void				ft_do_dup_parent(void);
+
+	//utils.c
+void				ft_lstclear_env(t_list **lst);
+
 
 #endif

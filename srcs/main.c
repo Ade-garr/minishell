@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:40:41 by user42            #+#    #+#             */
-/*   Updated: 2021/03/02 23:09:14 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/03/03 15:30:30 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ void    ft_error(void)
 
 void    ft_exit(void)
 {
-	// if (g_shell->env != NULL)
-	// 	ft_lstclear(&g_shell->env, &free);
-	// if (g_shell->line != NULL)
-	// {
-	// 	free(g_shell->line);
-	// 	g_shell->line = NULL;
-	// }
-	// /// FREE CMD ET DIR
-	// free(g_shell);
-	// g_shell = NULL;
+	if (g_shell->env != NULL)
+		ft_lstclear_env(&g_shell->env);
+	if (g_shell->line != NULL)
+	{
+		free(g_shell->line);
+		g_shell->line = NULL;
+	}
+	/// FREE CMD ET DIR
+	free(g_shell);
+	g_shell = NULL;
 	exit(0);
 }
 
