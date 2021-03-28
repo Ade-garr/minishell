@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/14 11:39:28 by ade-garr          #+#    #+#             */
-/*   Updated: 2021/03/28 16:17:58 by ade-garr         ###   ########.fr       */
+/*   Created: 2019/11/14 13:16:41 by ade-garr          #+#    #+#             */
+/*   Updated: 2021/03/28 13:18:40 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*ft_lstnew(void *content)
+int	ft_lstsize(t_list *lst)
 {
-	t_list	*begin;
+	int i;
 
-	if (!(begin = malloc(sizeof(t_list) * 1)))
-		return (NULL);
-	begin->content = content;
-	begin->next = 0;
-	return (begin);
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }

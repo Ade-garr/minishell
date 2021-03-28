@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/14 11:39:28 by ade-garr          #+#    #+#             */
-/*   Updated: 2021/03/28 16:17:58 by ade-garr         ###   ########.fr       */
+/*   Created: 2019/11/12 10:53:06 by ade-garr          #+#    #+#             */
+/*   Updated: 2021/03/26 15:30:16 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*ft_lstnew(void *content)
+int	ft_isprint(int c)
 {
-	t_list	*begin;
-
-	if (!(begin = malloc(sizeof(t_list) * 1)))
-		return (NULL);
-	begin->content = content;
-	begin->next = 0;
-	return (begin);
+	if (c >= 32 && c <= 126)
+		return (1);
+	return (0);
 }

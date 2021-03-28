@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:38:41 by user42            #+#    #+#             */
-/*   Updated: 2021/03/03 17:41:43 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/03/28 16:02:34 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 # include <stdio.h>
 # include <errno.h>
 # include <sys/wait.h>
+# include <termios.h>
+# include <curses.h>
+# include <term.h>
+
 
 # define BUFFER_SIZE 50
 
@@ -105,6 +109,18 @@ typedef struct		s_shell
 	int				pipefd[2];
 	int				flagparent; // à voir si à garder
 	int				returnvalue; // à voir si à garder
+	struct termios	orig_termios;
+	int				flag_termios;
+	char			*del_c;		//pas besoin de free
+	char			*del_line;	//pas besoin de free
+	char			*left_c;	//pas besoin de free
+	char			*line_up;	//pas besoin de free
+	char			*end_line;
+	int				nb_col;
+	int				pos_x;
+	int				nb_hist;
+	t_list			*hist;
+	char			*saved_line;
 }					t_shell;
 
 t_shell *g_shell;
@@ -137,9 +153,36 @@ void				ft_do_dup_child(void);
 void				ft_do_dup_parent(void);
 
 	//utils.c
+void				ft_incr_pos_x(void);
+int					ft_putchar(int c);
+int					ft_iscntrl(char c);
 void				ft_lstclear_env(t_list **lst);
+void				ft_error_bis(void);
+
+	//utils2.c
+char				*ft_get_history(void);
+
+	//readline.c
+void				ft_del_char(void);
+void				ft_add_char(char c);
+void				ft_analyse_del(void);
+void				ft_analyse_c(char c);
+void				ft_readline(void);
+
+	//readline2.c
+void				ft_add_to_hist(void);
+void				ft_unwrite_line(void);
+void				ft_write_line(void);
+void				ft_process_arrow_up(void);
+void				ft_analyse_escp(void);
 
 	//redirections.c
 void				ft_do_redirections(void);
+
+	//terminal.c
+void				param_termcap3(void);
+void				param_termcap2(void);
+void				param_termcap(void);
+void				enable_raw_mode(void);
 
 #endif

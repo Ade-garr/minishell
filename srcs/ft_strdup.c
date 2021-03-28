@@ -1,24 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/14 11:39:28 by ade-garr          #+#    #+#             */
-/*   Updated: 2021/03/28 16:17:58 by ade-garr         ###   ########.fr       */
+/*   Created: 2019/11/12 16:15:39 by ade-garr          #+#    #+#             */
+/*   Updated: 2021/03/28 13:39:16 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*ft_lstnew(void *content)
+static void	ft_strcpy(char *dest, const char *src)
 {
-	t_list	*begin;
+	int i;
 
-	if (!(begin = malloc(sizeof(t_list) * 1)))
+	i = 0;
+	if (src != NULL)
+	{
+		while (src[i])
+		{
+			dest[i] = src[i];
+			i++;
+		}
+	}
+	dest[i] = '\0';
+}
+
+char		*ft_strdup(const char *s)
+{
+	char *s2;
+
+	if (!(s2 = malloc(sizeof(char) * (ft_strlen(s) + 1))))
 		return (NULL);
-	begin->content = content;
-	begin->next = 0;
-	return (begin);
+	ft_strcpy(s2, s);
+	return (s2);
 }
