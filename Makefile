@@ -6,7 +6,7 @@
 #    By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/12 10:29:31 by user42            #+#    #+#              #
-#    Updated: 2021/03/28 13:38:54 by ade-garr         ###   ########.fr        #
+#    Updated: 2021/03/29 10:50:52 by ade-garr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS += ./srcs/terminal.c
 SRCS += ./srcs/ft_isprint.c
 SRCS += ./srcs/readline.c
 SRCS += ./srcs/readline2.c
+SRCS += ./srcs/readline3.c
 SRCS += ./srcs/ft_strlen.c
 SRCS += ./srcs/ft_strdup.c
 

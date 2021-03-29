@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 18:26:31 by ade-garr          #+#    #+#             */
-/*   Updated: 2021/03/28 16:34:55 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/03/29 11:02:41 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,7 @@ void	ft_analyse_del(void)
 
 void	ft_analyse_c(char c)
 {
-	if (c == 'p') //paragraphe à delete
-	{
-		while (g_shell->hist != NULL)
-		{
-			printf("%s\r\n", (char *)g_shell->hist->content);
-			g_shell->hist = g_shell->hist->next;
-		}
-	}
-	else if (ft_isprint(c) == 1) // enlever le else
+	if (ft_isprint(c) == 1)
 	{
 		write(1, &c, 1);
 		ft_add_char(c);

@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:38:41 by user42            #+#    #+#             */
-/*   Updated: 2021/03/28 16:02:34 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/03/29 10:32:17 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ typedef struct		s_shell
 	struct termios	orig_termios;
 	int				flag_termios;
 	char			*del_c;		//pas besoin de free
-	char			*del_line;	//pas besoin de free
+	char			*del_line;	//pas besoin de free, à voir si à garder ou non
 	char			*left_c;	//pas besoin de free
 	char			*line_up;	//pas besoin de free
 	char			*end_line;
@@ -175,6 +175,9 @@ void				ft_unwrite_line(void);
 void				ft_write_line(void);
 void				ft_process_arrow_up(void);
 void				ft_analyse_escp(void);
+
+	//readline3.c
+void				ft_process_arrow_down(void);
 
 	//redirections.c
 void				ft_do_redirections(void);
