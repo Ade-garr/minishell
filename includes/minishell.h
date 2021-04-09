@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:38:41 by user42            #+#    #+#             */
-/*   Updated: 2021/03/29 10:32:17 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/04/09 20:12:45 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,54 @@ int					get_next_line(int fd, char **line);
 
 //MINISHELL
 
+enum	type
+{
+	WORD,
+	AND,
+	OR,
+	SEMICOLON,
+	PIPE,
+	RIGHT,
+	LEFT,
+	DRIGHT,
+	DLEFT,
+	CMD,
+};
+
+typedef	struct s_token
+{
+	char			*s;
+	enum type 		type;
+}				t_token;
+
+typedef struct		s_cmd
+{
+	int				pipe_flag;
+	t_list			*exec_lst; // LL car env var
+	t_list			*rdir_lst; // content = s_rdir
+}					t_cmd;
+
+typedef struct	s_node
+{
+	enum type 		type; 
+	t_list			*cmd_lst; // content = t_cmd
+	struct s_node	*left;
+	struct s_node	*right;
+}				t_node;
+
+typedef struct		s_rdir
+{
+	int				flag; // 1 == > // 2 == < // 3 == >> // 4 == <<
+	char			*file; // attention aux ambiguous redirect  jeej="file    mdr"     $ echo test > $jeej
+}					t_rdir;
+
 typedef struct		s_shell
 {
 	t_list			*env;
-	t_list			*cmd;
-	t_list			*tmp;
-	t_list			*tmpdir;
+	t_list			*cmd; // à changer ?
+	t_list			*tmp; // à changer ?
+	t_list			*tmpdir; // à changer ?
+	t_node			*ast;
 	char			*line;
 	pid_t			pid_pipe;
 	pid_t			pid_exec;
@@ -139,10 +181,10 @@ typedef struct		s_dirinfo
 }					t_dirinfo;
 
 	//main.c
+t_node				*ft_launch_lexer(char *line);
 void				get_list_env(char **env);
 void				init_shell(void);
 void				ft_exit(void);
-void				ft_error(void);
 int					main(int argc, char **argv, char **env);
 
 	//execute.c
@@ -160,6 +202,7 @@ void				ft_lstclear_env(t_list **lst);
 void				ft_error_bis(void);
 
 	//utils2.c
+void				ft_error(void);
 char				*ft_get_history(void);
 
 	//readline.c
@@ -168,6 +211,13 @@ void				ft_add_char(char c);
 void				ft_analyse_del(void);
 void				ft_analyse_c(char c);
 void				ft_readline(void);
+
+	//utils3.c
+int					is_space(char c);
+int					is_escaped(char c, char *s, int i);
+void				skip_spaces(char *str, int *i);
+t_token				**free_lexer(t_token **lexer);
+int					is_special(char *s, int i);
 
 	//readline2.c
 void				ft_add_to_hist(void);
@@ -187,5 +237,41 @@ void				param_termcap3(void);
 void				param_termcap2(void);
 void				param_termcap(void);
 void				enable_raw_mode(void);
+
+	//lexer.c
+t_token				*new_token(char *s);
+void				skip_to_next_valid_quote(char *s, int *i);
+t_token				*build_token(char *s, int *i);
+int					word_count(char *s);
+t_token				**ft_lexer(char *s);
+
+	//parser1.c
+int					syntax_err(t_token **lexer, int	i);
+int					syntax_check(t_token **lexer);
+int					find_separator(t_token **lexer);
+t_node				*ft_new_node(enum type type, t_list *cmd_lst);
+t_node				*parser(t_token **lexer);
+
+	//parser2.c
+int					add_to_cmd_lst(t_cmd **cmd, t_list **cmd_lst, int pipe_flag);
+int					add_to_rdir_lst(t_token **lexer, int *i, t_cmd *cmd);
+int					add_to_exec_lst(t_token **lexer, t_cmd *cmd, int i);
+t_node				*build_node(t_token **lexer);
+t_node				*build_tree(t_token **lexer);
+
+	//free_ast.c
+void				free_rdir(t_rdir *rdir);
+void				free_cmd(t_cmd *cmd);
+void				free_cmd_lst(t_list *cmd_lst);
+void				free_node(t_node *node);
+void				free_ast(t_node *ast);
+
+// PRINT_LEXER_PARSER.C -- to delete before eval
+void	print_lexer(t_token **lexer, char *s);
+void	print_exec_lst(t_list *exec_lst);
+void	print_rdir_lst(t_list *rdir_lst);
+void	print_children(t_node *node, int tree_pos);
+void	print_ast_node(t_node *node, int tree_pos);
+void	print_parser(t_node *ast);
 
 #endif

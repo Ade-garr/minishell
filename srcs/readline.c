@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 18:26:31 by ade-garr          #+#    #+#             */
-/*   Updated: 2021/03/29 11:02:41 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/04/09 20:13:47 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,11 +129,13 @@ void	ft_readline(void)
 					break;
 				}
 		}
-		// ret = get_next_line(1, &g_shell->line);		// à voir si à garder
 		// A COMPLETER
+		// ret = get_next_line(1, &g_shell->line);		// à voir si à garder
 		// ft_exec_cmd();								// à voir si à garder
 		write(2, "\r\n", 2);
+		g_shell->ast = ft_launch_lexer(g_shell->line);
 		// A MODIFIER
+		free_ast(g_shell->ast);
 		free(g_shell->line);
 		g_shell->line = NULL;
 		// A MODIFIER

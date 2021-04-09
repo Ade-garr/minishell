@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/27 14:58:56 by ade-garr          #+#    #+#             */
-/*   Updated: 2021/04/09 19:47:07 by ade-garr         ###   ########.fr       */
+/*   Created: 2019/11/15 12:32:14 by vlugand-          #+#    #+#             */
+/*   Updated: 2021/04/09 20:19:54 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_error(void)
+void	ft_putstr_fd(char *s, int fd)
 {
-	printf("%s\r\n", strerror(errno));
-	ft_exit();
-}
-
-char	*ft_get_history(void)
-{
-	t_list	*tmp_lst;
 	int		i;
 
-	i = g_shell->nb_hist;
-	tmp_lst = g_shell->hist;
-	while (ft_lstsize(g_shell->hist) - i > 0)
+	i = 0;
+	if (s)
 	{
-		tmp_lst = tmp_lst->next;
-		i++;
+		while (s[i])
+		{
+			write(fd, &s[i], 1);
+			i++;
+		}
 	}
-	return ((char *)tmp_lst->content);
 }

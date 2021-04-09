@@ -6,16 +6,25 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:40:41 by user42            #+#    #+#             */
-/*   Updated: 2021/03/28 16:36:03 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/04/09 20:12:13 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_error(void)
+t_node		*ft_launch_lexer(char *line)
 {
-	printf("%s\r\n", strerror(errno));
-	ft_exit();
+	t_token		**lexer;
+	t_node		*ast;
+
+	if (!(lexer = ft_lexer(line)))
+		return (0); 
+	print_lexer(lexer, line); // print to debug
+	if(!(ast = parser(lexer)))
+		return (0);
+	print_parser(ast); // print to debug
+//	system("leaks minishell");// uncomment to test leaks on mac os
+	return (ast);
 }
 
 void	ft_exit(void)	// a revoir selon parsing et code

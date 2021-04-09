@@ -292,9 +292,8 @@ int		main()
 	ret = tgetent(NULL, getenv("TERM"));
 	ch = tgetstr("ch", NULL);
 	nb_col = tgetnum("co");
-	printf("%d\n", nb_col);
 	c = '\0';
-	enable_raw_mode();
+	// enable_raw_mode();
 	while (1) 
 	{
 		if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN)
@@ -304,6 +303,6 @@ int		main()
 		if (c == ctrl_q('a'))
 			break;
 	}
-	disable_raw_mode();
+	// disable_raw_mode();
 	return (0);
 }
