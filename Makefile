@@ -6,7 +6,7 @@
 #    By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/12 10:29:31 by user42            #+#    #+#              #
-#    Updated: 2021/04/09 20:20:21 by ade-garr         ###   ########.fr        #
+#    Updated: 2021/04/15 17:46:43 by ade-garr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SRCS += ./srcs/ft_lstclear.c
 SRCS += ./srcs/ft_lstsize.c
 SRCS += ./srcs/get_next_line.c
 SRCS += ./srcs/get_next_line_utils.c
-SRCS += ./srcs/execute.c
+SRCS += ./srcs/execute1.c
+SRCS += ./srcs/execute2.c
 SRCS += ./srcs/ft_bzero.c
 SRCS += ./srcs/ft_calloc.c
 SRCS += ./srcs/utils.c

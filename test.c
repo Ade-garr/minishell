@@ -11,6 +11,7 @@
 #include <termios.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
+#include <signal.h>
 
 // int main(int argc, char **argv, char **env)
 // {
@@ -238,19 +239,82 @@
 /////////////////////////////////////////////////////////////////////
 
 
+// struct termios orig_termios;
+
+// int	ft_putchar(int c)
+// {
+// 	write(1, &c, 1);
+// 	return (1);
+// }
+
+// char	ctrl_q(char c)
+// {
+// 	c = c & 0x1f;
+// 	return (c);
+// }
+
+// void	ft_error()
+// {
+// 	printf("%s\n", strerror(errno));
+// 	//ft_exit();
+// 	exit (1);
+// }
+
+// void 	disable_raw_mode()
+// {
+// 	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios) == -1)
+// 		ft_error();
+// }
+
+// void	enable_raw_mode() 
+// {
+// 	struct termios raw;
+
+// 	if (tcgetattr(STDIN_FILENO, &orig_termios) == -1)
+// 		ft_error();
+// 	raw = orig_termios;
+// 	raw.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
+// 	raw.c_oflag &= ~(OPOST);
+// 	raw.c_cflag |= (CS8);
+// 	raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
+// 	raw.c_cc[VMIN] = 0;
+// 	raw.c_cc[VTIME] = 1;
+// 	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1)
+// 		ft_error();
+// }
+
+// int		main() 
+// {
+// 	char	c;
+// 	int		ret;
+// 	char 	*ch;
+// 	int		nb_col;
+
+// 	ret = tgetent(NULL, getenv("TERM"));
+// 	ch = tgetstr("ch", NULL);
+// 	nb_col = tgetnum("co");
+// 	c = '\0';
+// 	enable_raw_mode();
+// 	while (1) 
+// 	{
+// 		if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN)
+// 			ft_error();
+// 		if (c == 'a')
+// 			tputs(tgoto(ch, 0, 107), 1, ft_putchar);
+// 		if (c == ctrl_q('a'))
+// 			break;
+// 	}
+// 	disable_raw_mode();
+// 	return (0);
+// }
+
+
+
+/////////////////////////////////////////////////////////////////////
+///SIGNAUX
+/////////////////////////////////////////////////////////////////////
+
 struct termios orig_termios;
-
-int	ft_putchar(int c)
-{
-	write(1, &c, 1);
-	return (1);
-}
-
-char	ctrl_q(char c)
-{
-	c = c & 0x1f;
-	return (c);
-}
 
 void	ft_error()
 {
@@ -272,37 +336,51 @@ void	enable_raw_mode()
 	if (tcgetattr(STDIN_FILENO, &orig_termios) == -1)
 		ft_error();
 	raw = orig_termios;
-	raw.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
-	raw.c_oflag &= ~(OPOST);
-	raw.c_cflag |= (CS8);
-	raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
-	raw.c_cc[VMIN] = 0;
-	raw.c_cc[VTIME] = 1;
+	// raw.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
+	// raw.c_oflag &= ~(OPOST);
+	// raw.c_cflag |= (CS8);
+	// raw.c_lflag &= ~(ISIG);
+	// raw.c_cc[VMIN] = 0;
+	// raw.c_cc[VTIME] = 1;
 	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1)
 		ft_error();
 }
 
-int		main() 
+void handler(int theSignal)
 {
-	char	c;
-	int		ret;
-	char 	*ch;
-	int		nb_col;
+  printf("Je receptionne le signal %d\n",theSignal);
+}
 
-	ret = tgetent(NULL, getenv("TERM"));
-	ch = tgetstr("ch", NULL);
-	nb_col = tgetnum("co");
-	c = '\0';
-	// enable_raw_mode();
-	while (1) 
-	{
-		if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN)
-			ft_error();
-		if (c == 'a')
-			tputs(tgoto(ch, 0, 107), 1, ft_putchar);
-		if (c == ctrl_q('a'))
-			break;
-	}
-	// disable_raw_mode();
+void handler2(int theSignal)
+{
+  printf("Je receptionne le signal dans le fils %d\n",theSignal);
+}
+
+void handler3(int theSignal)
+{
+  printf("Je receptionne le signal dans le main %d\n",theSignal);
+}
+
+int main(void)
+{
+	int	pid;
+	char c;
+	
+	enable_raw_mode();
+	read(0, &c, 1);
+	disable_raw_mode();
+	// signal(SIGINT, &handler3);
+	// signal(SIGINT, &handler2);
+	// pid = fork();
+	// if (pid == 0)
+	// {
+	// 	signal(SIGINT, &handler2);
+	// }
+	// else
+	// {
+	// 	signal(SIGINT, &handler);
+	// }
+	// while (1)
+	// {}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:40:41 by user42            #+#    #+#             */
-/*   Updated: 2021/04/09 20:12:13 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/04/17 16:21:28 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,17 @@ t_node		*ft_launch_lexer(char *line)
 
 	if (!(lexer = ft_lexer(line)))
 		return (0); 
-	print_lexer(lexer, line); // print to debug
+	// print_lexer(lexer, line); // print to debug
 	if(!(ast = parser(lexer)))
 		return (0);
-	print_parser(ast); // print to debug
+	// print_parser(ast); // print to debug
 //	system("leaks minishell");// uncomment to test leaks on mac os
 	return (ast);
 }
 
 void	ft_exit(void)	// a revoir selon parsing et code
 {
-	if (g_shell->env != NULL)
-		ft_lstclear_env(&g_shell->env);
-	if (g_shell->line != NULL)
-	{
-		free(g_shell->line);
-		g_shell->line = NULL;
-	}
-	/// FREE CMD ET DIR
-	if (g_shell->flag_termios == 1)
-	{
-		if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &g_shell->orig_termios) == -1)
-			printf("%s\r\n", strerror(errno));
-	}
-	free(g_shell);
-	g_shell = NULL;
+	free_global_struct();
 	exit(1);
 }
 
@@ -57,14 +43,17 @@ void    init_shell(void)
 	}
 	g_shell->env = NULL;
 	g_shell->line = NULL;
-	g_shell->tmp = NULL;
+	g_shell->tmp_cmd = NULL;
 	g_shell->cmd = NULL;
-	g_shell->flagparent = 1;
+	g_shell->child_flag = 0;
 	g_shell->flag_termios = 0;
 	g_shell->pos_x = 3;
 	g_shell->nb_hist = 0;
 	g_shell->hist = NULL;
 	g_shell->saved_line = NULL;
+	g_shell->return_value = 0;
+	g_shell->pid_pipe = 0;
+	g_shell->pid_exec = 0;
 }
 
 void    get_list_env(char **env)

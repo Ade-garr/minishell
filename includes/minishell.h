@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:38:41 by user42            #+#    #+#             */
-/*   Updated: 2021/04/09 20:12:45 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/04/17 16:57:12 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,15 +142,16 @@ typedef struct		s_shell
 {
 	t_list			*env;
 	t_list			*cmd; // à changer ?
-	t_list			*tmp; // à changer ?
+	t_list			*tmp_cmd; // à changer ?
 	t_list			*tmpdir; // à changer ?
 	t_node			*ast;
 	char			*line;
+	int				child_status;
 	pid_t			pid_pipe;
 	pid_t			pid_exec;
 	int				pipefd[2];
-	int				flagparent; // à voir si à garder
-	int				returnvalue; // à voir si à garder
+	int				child_flag; // à voir si à garder
+	int				return_value; // à voir si à garder
 	struct termios	orig_termios;
 	int				flag_termios;
 	char			*del_c;		//pas besoin de free
@@ -167,19 +168,6 @@ typedef struct		s_shell
 
 t_shell *g_shell;
 
-typedef struct		s_cmdinfo
-{
-	int				flagpipe;
-	char			**exec;
-	t_list			*dir;
-}					t_cmdinfo;
-
-typedef struct		s_dirinfo
-{
-	int				flagdir;
-	char			*file;
-}					t_dirinfo;
-
 	//main.c
 t_node				*ft_launch_lexer(char *line);
 void				get_list_env(char **env);
@@ -187,12 +175,15 @@ void				init_shell(void);
 void				ft_exit(void);
 int					main(int argc, char **argv, char **env);
 
-	//execute.c
-void				ft_exec_cmd(void);
+	//execute1.c
+void				ft_exec_cmd(t_node *node);
 void				ft_process_cmd(void);
 void				ft_do_pipes(void);
 void				ft_do_dup_child(void);
 void				ft_do_dup_parent(void);
+
+	//execute2.c
+void				launch_execution(t_node *node);
 
 	//utils.c
 void				ft_incr_pos_x(void);
@@ -204,6 +195,8 @@ void				ft_error_bis(void);
 	//utils2.c
 void				ft_error(void);
 char				*ft_get_history(void);
+void				ft_do_ctrl_d(void);
+void				free_global_struct(void);
 
 	//readline.c
 void				ft_del_char(void);

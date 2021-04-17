@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   execute1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:30:22 by ade-garr          #+#    #+#             */
-/*   Updated: 2021/03/26 15:46:04 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/04/17 16:51:03 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_do_dup_child(void)
 		ft_error();
 	if (close(g_shell->pipefd[0]) == -1)
 		ft_error();
-	g_shell->tmp = g_shell->tmp->next;
+	g_shell->tmp_cmd = g_shell->tmp_cmd->next;
 	ft_do_pipes();
 }
 
@@ -38,7 +38,7 @@ void	ft_do_pipes(void)
 {
 	int i;
 
-	if (((t_cmdinfo *)g_shell->tmp->content)->flagpipe == 1)
+	if (((t_cmd *)g_shell->tmp_cmd->content)->pipe_flag == 1)
 	{
 		i = pipe(g_shell->pipefd);
 		if (i == -1)
@@ -48,7 +48,7 @@ void	ft_do_pipes(void)
 			ft_error();
 		if (g_shell->pid_pipe == 0)
 		{
-			g_shell->flagparent = 0;
+			g_shell->child_flag = 1; // à garder ?
 			ft_do_dup_child();
 		}
 		else
@@ -61,21 +61,27 @@ void	ft_process_cmd(void)
 	ft_do_pipes();
 	ft_do_redirections();
 
-	// // POUR TEST PIPES
-	// int status;
-	// write(1, ((t_cmdinfo *)g_shell->tmp->content)->exec[0], 14);
-	// if (g_shell->flagparent == 0)
-	// 	ft_exit();
-	// wait(&status);
-	// // FIN TEST
+	// POUR TEST PIPES
+	// write(1, ((char *)((t_cmd *)g_shell->tmp_cmd->content)->exec_lst->content), 4);
+	// write(1, " ", 1);
+	// write(1, ((char *)((t_cmd *)g_shell->tmp_cmd->content)->exec_lst->next->content), 3);
+	// write(1, "\r\n", 2);
+	// FIN TEST PIPES
+	if (g_shell->pid_pipe != 0)
+		waitpid(g_shell->pid_pipe, &g_shell->child_status, 0);
+	if (g_shell->child_flag == 1)
+	{
+		tcsetattr(STDIN_FILENO, TCSAFLUSH, &g_shell->orig_termios);
+		exit(0);
+	}
 }
 
-void	ft_exec_cmd(void)
+void	ft_exec_cmd(t_node *node)
 {
 	int oldstdout;
 	int oldstdin;
 
-	g_shell->tmp = g_shell->cmd;
+	g_shell->tmp_cmd = node->cmd_lst;
 	oldstdout = dup(1);
 	if (oldstdout == -1)
 		ft_error();
