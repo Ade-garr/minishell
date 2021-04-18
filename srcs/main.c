@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:40:41 by user42            #+#    #+#             */
-/*   Updated: 2021/04/17 16:21:28 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/04/18 17:02:32 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void    init_shell(void)
 	g_shell->return_value = 0;
 	g_shell->pid_pipe = 0;
 	g_shell->pid_exec = 0;
+	g_shell->error_flag = 0;
 }
 
 void    get_list_env(char **env)

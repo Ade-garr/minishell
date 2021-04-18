@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:38:41 by user42            #+#    #+#             */
-/*   Updated: 2021/04/17 16:57:12 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/04/18 15:58:10 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ typedef struct		s_shell
 	pid_t			pid_pipe;
 	pid_t			pid_exec;
 	int				pipefd[2];
+	int				error_flag;
 	int				child_flag; // à voir si à garder
 	int				return_value; // à voir si à garder
 	struct termios	orig_termios;
