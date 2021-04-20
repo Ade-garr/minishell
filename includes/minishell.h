@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:38:41 by user42            #+#    #+#             */
-/*   Updated: 2021/04/18 15:58:10 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/04/20 11:23:13 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ typedef struct		s_shell
 	t_list			*env;
 	t_list			*cmd; // à changer ?
 	t_list			*tmp_cmd; // à changer ?
-	t_list			*tmpdir; // à changer ?
+	t_list			*tmp_dir; // à changer ?
 	t_node			*ast;
 	char			*line;
 	int				child_status;
@@ -186,6 +186,18 @@ void				ft_do_dup_parent(void);
 	//execute2.c
 void				launch_execution(t_node *node);
 
+	//expansion.c
+char				*find_match_in_env(char *s, int *len, t_list *env);
+char				*replace_var(char *s, int i, t_list *env);
+char				*expand_content(char *s, t_list *env);
+int					check_dollar_sign(char *s);
+void				replace_elem(t_token **content, t_list *elem, t_list *prev);
+
+	//expansion2.c
+void				expansion_in_exec_lst(t_list *exec_lst, t_list *env);
+int					is_ambiguous_redirect(char *s);
+void				expansion_in_rdir_lst(t_list *rdir_lst, t_list *env);
+
 	//utils.c
 void				ft_incr_pos_x(void);
 int					ft_putchar(int c);
@@ -208,10 +220,15 @@ void				ft_readline(void);
 
 	//utils3.c
 int					is_space(char c);
-int					is_escaped(char c, char *s, int i);
-void				skip_spaces(char *str, int *i);
-t_token				**free_lexer(t_token **lexer);
+int					is_escaped(char *s, int pos);
 int					is_special(char *s, int i);
+int					which_operator(char *s, int i);
+void				skip_spaces(char *str, int *i);
+
+	//utils4.c
+void				skip_to_next_valid_quote(char *s, int *i);
+t_token				**free_lexer(t_token **lexer);
+char				*join_three_str(char *s1, char *s2, char *s3);
 
 	//readline2.c
 void				ft_add_to_hist(void);
@@ -234,7 +251,6 @@ void				enable_raw_mode(void);
 
 	//lexer.c
 t_token				*new_token(char *s);
-void				skip_to_next_valid_quote(char *s, int *i);
 t_token				*build_token(char *s, int *i);
 int					word_count(char *s);
 t_token				**ft_lexer(char *s);
@@ -252,6 +268,10 @@ int					add_to_rdir_lst(t_token **lexer, int *i, t_cmd *cmd);
 int					add_to_exec_lst(t_token **lexer, t_cmd *cmd, int i);
 t_node				*build_node(t_token **lexer);
 t_node				*build_tree(t_token **lexer);
+
+	//quotes.s
+char				*make_unquoted_str(char *s, int *i);
+void				quotes_removal(char **s);
 
 	//free_ast.c
 void				free_rdir(t_rdir *rdir);

@@ -12,6 +12,9 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <signal.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 // int main(int argc, char **argv, char **env)
 // {
@@ -314,73 +317,87 @@
 ///SIGNAUX
 /////////////////////////////////////////////////////////////////////
 
-struct termios orig_termios;
+// struct termios orig_termios;
 
-void	ft_error()
-{
-	printf("%s\n", strerror(errno));
-	//ft_exit();
-	exit (1);
-}
+// void	ft_error()
+// {
+// 	printf("%s\n", strerror(errno));
+// 	//ft_exit();
+// 	exit (1);
+// }
 
-void 	disable_raw_mode()
-{
-	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios) == -1)
-		ft_error();
-}
+// void 	disable_raw_mode()
+// {
+// 	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios) == -1)
+// 		ft_error();
+// }
 
-void	enable_raw_mode() 
-{
-	struct termios raw;
+// void	enable_raw_mode() 
+// {
+// 	struct termios raw;
 
-	if (tcgetattr(STDIN_FILENO, &orig_termios) == -1)
-		ft_error();
-	raw = orig_termios;
-	// raw.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
-	// raw.c_oflag &= ~(OPOST);
-	// raw.c_cflag |= (CS8);
-	// raw.c_lflag &= ~(ISIG);
-	// raw.c_cc[VMIN] = 0;
-	// raw.c_cc[VTIME] = 1;
-	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1)
-		ft_error();
-}
+// 	if (tcgetattr(STDIN_FILENO, &orig_termios) == -1)
+// 		ft_error();
+// 	raw = orig_termios;
+// 	// raw.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
+// 	// raw.c_oflag &= ~(OPOST);
+// 	// raw.c_cflag |= (CS8);
+// 	// raw.c_lflag &= ~(ISIG);
+// 	// raw.c_cc[VMIN] = 0;
+// 	// raw.c_cc[VTIME] = 1;
+// 	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1)
+// 		ft_error();
+// }
 
-void handler(int theSignal)
-{
-  printf("Je receptionne le signal %d\n",theSignal);
-}
+// void handler(int theSignal)
+// {
+//   printf("Je receptionne le signal %d\n",theSignal);
+// }
 
-void handler2(int theSignal)
-{
-  printf("Je receptionne le signal dans le fils %d\n",theSignal);
-}
+// void handler2(int theSignal)
+// {
+//   printf("Je receptionne le signal dans le fils %d\n",theSignal);
+// }
 
-void handler3(int theSignal)
-{
-  printf("Je receptionne le signal dans le main %d\n",theSignal);
-}
+// void handler3(int theSignal)
+// {
+//   printf("Je receptionne le signal dans le main %d\n",theSignal);
+// }
 
-int main(void)
-{
-	int	pid;
-	char c;
+// int main(void)
+// {
+// 	int	pid;
+// 	char c;
 	
-	enable_raw_mode();
-	read(0, &c, 1);
-	disable_raw_mode();
-	// signal(SIGINT, &handler3);
-	// signal(SIGINT, &handler2);
-	// pid = fork();
-	// if (pid == 0)
-	// {
-	// 	signal(SIGINT, &handler2);
-	// }
-	// else
-	// {
-	// 	signal(SIGINT, &handler);
-	// }
-	// while (1)
-	// {}
-	return (0);
+// 	enable_raw_mode();
+// 	read(0, &c, 1);
+// 	disable_raw_mode();
+// 	// signal(SIGINT, &handler3);
+// 	// signal(SIGINT, &handler2);
+// 	// pid = fork();
+// 	// if (pid == 0)
+// 	// {
+// 	// 	signal(SIGINT, &handler2);
+// 	// }
+// 	// else
+// 	// {
+// 	// 	signal(SIGINT, &handler);
+// 	// }
+// 	// while (1)
+// 	// {}
+// 	return (0);
+// }
+
+
+
+/////////////////////////////////////////////////////////////////////
+///OPEN
+/////////////////////////////////////////////////////////////////////
+
+int	main()
+{
+	int	fd;
+
+	fd = open("zzzzz", O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+	return(0);
 }

@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 11:39:42 by vlugand-          #+#    #+#             */
-/*   Updated: 2021/04/09 20:17:20 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/04/20 11:11:32 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,30 +36,6 @@ t_token			*new_token(char *s)
 	else if (s[0] == '<' && s[1] == '<')
 		token->type = DLEFT;
 	return (token);
-}
-
-void			skip_to_next_valid_quote(char *s, int *i)
-{
-	if (s[*i] && !is_escaped('\'', s, *i))
-	{
-		(*i)++;
-		while (s[*i])
-		{
-			if (s[*i] == '\'' && !is_escaped('\'', s, *i))
-				break ;
-			(*i)++;
-		}
-	}
-	else if (s[*i] && !is_escaped('\"', s, *i))
-	{
-		(*i)++;
-		while (s[*i])
-		{
-			if (s[*i] == '\"' && !is_escaped('\"', s, *i))
-				break ;
-			(*i)++;
-		}
-	}
 }
 
 int				word_count(char *s)
@@ -94,14 +70,14 @@ t_token			*build_token(char *s, int *i)
 	int			len;
 	char		*dst;
 
-	len = 0;
+	len = *i;
 	while (s[*i] && !is_space(s[*i]) && !is_special(s, *i))
 	{
 		if (s[*i] == '\'' || s[*i] == '\"')
 			skip_to_next_valid_quote(s, i);
 		(*i)++;
-		len++;
 	}
+	len = *i - len;
 	if (s[*i] && (is_special(s, *i) == 1 || is_special(s, *i) == 2) && len == 0)
 	{
 		len = is_special(s, *i);

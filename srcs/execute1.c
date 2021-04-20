@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:30:22 by ade-garr          #+#    #+#             */
-/*   Updated: 2021/04/17 16:51:03 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/04/19 17:10:37 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ void	ft_process_cmd(void)
 	ft_do_redirections();
 
 	// POUR TEST PIPES
-	// write(1, ((char *)((t_cmd *)g_shell->tmp_cmd->content)->exec_lst->content), 4);
-	// write(1, " ", 1);
-	// write(1, ((char *)((t_cmd *)g_shell->tmp_cmd->content)->exec_lst->next->content), 3);
-	// write(1, "\r\n", 2);
+	write(1, ((char *)((t_cmd *)g_shell->tmp_cmd->content)->exec_lst->content), 4);
+	write(1, " ", 1);
+	write(1, ((char *)((t_cmd *)g_shell->tmp_cmd->content)->exec_lst->next->content), 3);
+	write(1, "\r\n", 2);
 	// FIN TEST PIPES
 	if (g_shell->pid_pipe != 0)
 		waitpid(g_shell->pid_pipe, &g_shell->child_status, 0);
