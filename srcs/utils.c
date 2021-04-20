@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 15:28:25 by ade-garr          #+#    #+#             */
-/*   Updated: 2021/03/27 15:44:53 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/04/20 12:07:55 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_incr_pos_x(void)
 {
-	g_shell->pos_x = ((ft_strlen(g_shell->line) + 2) % g_shell->nb_col) + 1;
+	g_shell->pos_x = ((ft_strlen_safe(g_shell->line) + 2) % g_shell->nb_col) + 1;
 	if (g_shell->pos_x == 1)
 		g_shell->pos_x = g_shell->nb_col;
 }

@@ -1,37 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main copy.c                                        :+:      :+:    :+:   */
+/*   ft_isprint_safe.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/24 14:09:59 by vlugand-          #+#    #+#             */
-/*   Updated: 2021/04/09 19:45:32 by ade-garr         ###   ########.fr       */
+/*   Created: 2019/11/12 10:53:06 by ade-garr          #+#    #+#             */
+/*   Updated: 2021/04/20 12:01:43 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		main(int ac, char **av)
+int	ft_isprint_safe(int c)
 {
-	t_token		**lexer;
-	t_node		*ast;
-
-	(void)ac;
-	if (!(lexer = ft_lexer(av[1])))
-		return (0); 
-	print_lexer(lexer, av[1]); // print to debug
-	if(!(ast = parser(lexer)))
-		return (0);
-	print_parser(ast); // print to debug
-	free_ast(ast);
-//	system("leaks minishell");// uncomment to test leaks on mac os
+	if (c >= 32 && c <= 126)
+		return (1);
 	return (0);
 }
-
-/*ATTENTION VAR 
-
-check les chifres et symboles spe
-difference avec ou sans export
-peut concat avec +=
-*/

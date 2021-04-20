@@ -5,20 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/07 16:35:20 by ade-garr          #+#    #+#             */
-/*   Updated: 2021/03/26 19:20:26 by ade-garr         ###   ########.fr       */
+/*   Created: 2019/11/04 11:45:54 by vlugand-          #+#    #+#             */
+/*   Updated: 2021/04/20 12:13:18 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	ft_strlen(const char *s)
+size_t		ft_strlen(const char *s)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	if (s == NULL)
-		return (0);
 	while (s[i])
 		i++;
 	return (i);

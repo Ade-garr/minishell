@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strdup_safe.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/10 16:28:13 by vlugand-          #+#    #+#             */
-/*   Updated: 2021/04/20 12:13:02 by ade-garr         ###   ########.fr       */
+/*   Created: 2019/11/12 16:15:39 by ade-garr          #+#    #+#             */
+/*   Updated: 2021/04/20 12:06:32 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_strdup(const char *s1)
+static void	ft_strcpy(char *dest, const char *src)
 {
-	int		i;
-	char	*s2;
+	int i;
 
-	if (!(s2 = (char*)malloc(ft_strlen(s1) * sizeof(char) + 1)))
-		return (NULL);
 	i = 0;
-	while (s1[i])
+	if (src != NULL)
 	{
-		s2[i] = s1[i];
-		i++;
+		while (src[i])
+		{
+			dest[i] = src[i];
+			i++;
+		}
 	}
-	s2[i] = '\0';
+	dest[i] = '\0';
+}
+
+char		*ft_strdup_safe(const char *s)
+{
+	char *s2;
+
+	if (!(s2 = malloc(sizeof(char) * (ft_strlen_safe(s) + 1))))
+		return (NULL);
+	ft_strcpy(s2, s);
 	return (s2);
 }

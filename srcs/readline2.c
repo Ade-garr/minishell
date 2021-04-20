@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 16:54:54 by ade-garr          #+#    #+#             */
-/*   Updated: 2021/03/29 10:54:06 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/04/20 12:07:41 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_add_to_hist(void)
 	t_list	*tmp;
 	char	*tmp_str;
 
-	tmp_str = ft_strdup(g_shell->line);
+	tmp_str = ft_strdup_safe(g_shell->line);
 	if (tmp_str == NULL)
 		ft_error();
 	tmp = ft_lstnew(tmp_str);
@@ -34,12 +34,12 @@ void	ft_unwrite_line(void)
 	int	i;
 
 	i = 0;
-	while ((ft_strlen(g_shell->line) - i) != 0)
+	while ((ft_strlen_safe(g_shell->line) - i) != 0)
 	{
-		if (((ft_strlen(g_shell->line) - i) + 2) % g_shell->nb_col == 0
+		if (((ft_strlen_safe(g_shell->line) - i) + 2) % g_shell->nb_col == 0
 		&& g_shell->pos_x == g_shell->nb_col)
 			tputs(g_shell->del_c, 1, ft_putchar);
-		else if (((ft_strlen(g_shell->line) - i) + 2) % g_shell->nb_col == 0
+		else if (((ft_strlen_safe(g_shell->line) - i) + 2) % g_shell->nb_col == 0
 		&& g_shell->pos_x == 1)
 		{
 			tputs(g_shell->line_up, 1, ft_putchar);
@@ -53,7 +53,7 @@ void	ft_unwrite_line(void)
 			tputs(g_shell->del_c, 1, ft_putchar);
 		}
 		i++;
-		g_shell->pos_x = (((ft_strlen(g_shell->line) - i) + 2)
+		g_shell->pos_x = (((ft_strlen_safe(g_shell->line) - i) + 2)
 		% g_shell->nb_col) + 1;
 	}
 }
@@ -80,7 +80,7 @@ void	ft_process_arrow_up(void)
 			g_shell->saved_line = g_shell->line;
 			g_shell->nb_hist++;
 			ft_unwrite_line();
-			g_shell->line = ft_strdup(ft_get_history());
+			g_shell->line = ft_strdup_safe(ft_get_history());
 			if (g_shell->line == NULL)
 				ft_error();
 			ft_write_line();
@@ -90,7 +90,7 @@ void	ft_process_arrow_up(void)
 			g_shell->nb_hist++;
 			ft_unwrite_line();
 			free(g_shell->line);
-			g_shell->line = ft_strdup(ft_get_history());
+			g_shell->line = ft_strdup_safe(ft_get_history());
 			if (g_shell->line == NULL)
 				ft_error();
 			ft_write_line();

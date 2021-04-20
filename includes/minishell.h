@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 10:38:41 by user42            #+#    #+#             */
-/*   Updated: 2021/04/20 11:23:13 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/04/20 12:08:22 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,17 +83,6 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
-
-///GNL
-int					ft_position(char *left);
-int					ft_free(char **line);
-int					ft_checkleft(char *left);
-size_t				ft_strlen_gnl(const char *s);
-char				*ft_join(char *line, char *left);
-void				ft_moveleft(char *left, char *newleft);
-int					ft_fill_line(int fd, char **line, char (*left)[BUFFER_SIZE + 1]);
-int					ft_give_line(char **line, char *left);
-int					get_next_line(int fd, char **line);
 
 //MINISHELL
 
@@ -279,6 +268,15 @@ void				free_cmd(t_cmd *cmd);
 void				free_cmd_lst(t_list *cmd_lst);
 void				free_node(t_node *node);
 void				free_ast(t_node *ast);
+
+	//ft_isprint_safe.c
+int					ft_isprint_safe(int c);
+
+	//ft_strdup_safe.c
+char				*ft_strdup_safe(const char *s);
+
+	//ft_strlen_safe.c
+size_t				ft_strlen_safe(const char *s);
 
 // PRINT_LEXER_PARSER.C -- to delete before eval
 void	print_lexer(t_token **lexer, char *s);

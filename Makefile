@@ -6,7 +6,7 @@
 #    By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/12 10:29:31 by user42            #+#    #+#              #
-#    Updated: 2021/04/20 11:16:29 by ade-garr         ###   ########.fr        #
+#    Updated: 2021/04/20 12:11:46 by ade-garr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,6 @@ SRCS += ./srcs/ft_lstlast.c
 SRCS += ./srcs/ft_lstnew.c
 SRCS += ./srcs/ft_lstclear.c
 SRCS += ./srcs/ft_lstsize.c
-SRCS += ./srcs/get_next_line.c
-SRCS += ./srcs/get_next_line_utils.c
 SRCS += ./srcs/execute1.c
 SRCS += ./srcs/execute2.c
 SRCS += ./srcs/expansion.c
@@ -30,15 +28,17 @@ SRCS += ./srcs/utils3.c
 SRCS += ./srcs/utils4.c
 SRCS += ./srcs/redirections.c
 SRCS += ./srcs/terminal.c
-SRCS += ./srcs/ft_isprint.c
+SRCS += ./srcs/ft_isprint_safe.c
 SRCS += ./srcs/readline.c
 SRCS += ./srcs/readline2.c
 SRCS += ./srcs/readline3.c
 SRCS += ./srcs/ft_strlcpy.c
+SRCS += ./srcs/ft_strlen_safe.c
 SRCS += ./srcs/ft_strlen.c
 SRCS += ./srcs/ft_strncmp.c
 SRCS += ./srcs/ft_putstr_fd.c
 SRCS += ./srcs/ft_strdup.c
+SRCS += ./srcs/ft_strdup_safe.c
 SRCS += ./srcs/lexer.c
 SRCS += ./srcs/parser1.c
 SRCS += ./srcs/parser2.c

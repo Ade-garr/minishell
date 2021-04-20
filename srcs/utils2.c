@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 14:58:56 by ade-garr          #+#    #+#             */
-/*   Updated: 2021/04/14 17:05:14 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/04/20 12:08:03 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_do_ctrl_d(void)
 {
 	int	ret;
 
-	if (ft_strlen(g_shell->line) == 0)
+	if (ft_strlen_safe(g_shell->line) == 0)
 	{
 		ret = g_shell->return_value;
 		free_global_struct();

@@ -6,7 +6,7 @@
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:31:09 by ade-garr          #+#    #+#             */
-/*   Updated: 2021/03/29 10:49:31 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/04/20 12:06:19 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_process_arrow_down(void)
 			g_shell->nb_hist--;
 			ft_unwrite_line();
 			free(g_shell->line);
-			g_shell->line = ft_strdup(ft_get_history());
+			g_shell->line = ft_strdup_safe(ft_get_history());
 			if (g_shell->line == NULL)
 				ft_error();
 			ft_write_line();
