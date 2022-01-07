@@ -6,7 +6,7 @@
 	<img src="./minishell.gif" >
 </p>
 
-Made with [valentinllpz](https://github.com/valentinllpz/minishell)
+Made with [valentinllpz](https://github.com/valentinllpz/minishell).
 
 ## 💡 Usage
 
@@ -14,7 +14,7 @@ Made with [valentinllpz](https://github.com/valentinllpz/minishell)
 make
 ./minishell
 ```
-
+<br>
 Features :
 - builtins : echo (-n), cd, pwd, export, unset, env, exit ✅
 - redirections : > >> < << ✅
@@ -25,5 +25,5 @@ Features :
 - in-line editor (<kbd>del</kbd>) ✅
 - commands history (<kbd>↑</kbd> <kbd>↓</kbd>) ✅
 
-## Contributors
+## 👷 Contributors
 - [Valentin Lugand](https://github.com/valentinllpz)
