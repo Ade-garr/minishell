@@ -2,7 +2,9 @@
 
 ⭐️ The objective of minishell is to code a simple shell.<br>
 
-
+<p align="center">
+	<img src="./minishell.gif" >
+</p>
 
 ## 💡 Usage
 
