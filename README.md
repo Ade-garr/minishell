@@ -6,6 +6,8 @@
 	<img src="./minishell.gif" >
 </p>
 
+Made with [valentinllpz](https://github.com/valentinllpz/minishell)
+
 ## 💡 Usage
 
 ```
