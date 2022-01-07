@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/14 13:21:07 by ade-garr          #+#    #+#             */
-/*   Updated: 2021/02/12 21:03:42 by ade-garr         ###   ########.fr       */
+/*   Created: 2021/06/07 16:40:47 by ade-garr          #+#    #+#             */
+/*   Updated: 2021/06/24 20:01:12 by ade-garr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
-t_list	*ft_lstlast(t_list *lst)
+void	builtin_env(t_shell *shell)
 {
-	if (lst == 0)
-		return (lst);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
+	t_list	*tmp;
+
+	tmp = shell->env;
+	while (tmp != NULL)
+	{
+		if (is_defined((char *)tmp->content) == 1)
+		{
+			ft_putstr_fd((char *)tmp->content, 1);
+			write(1, "\n", 1);
+		}
+		tmp = tmp->next;
+	}
+	shell->return_value = 0;
 }

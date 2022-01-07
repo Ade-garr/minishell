@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_ast.c                                         :+:      :+:    :+:   */
+/*   utils_free1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vlugand- <vlugand-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:33:39 by vlugand-          #+#    #+#             */
-/*   Updated: 2021/04/09 19:45:19 by ade-garr         ###   ########.fr       */
+/*   Updated: 2021/06/25 16:56:51 by vlugand-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 void	free_rdir(t_rdir *rdir)
 {
@@ -34,7 +34,7 @@ void	free_cmd(t_cmd *cmd)
 		free_rdir(((t_rdir *)cmd->rdir_lst->content));
 		tmp = cmd->rdir_lst->next;
 		free(cmd->rdir_lst);
-		cmd->rdir_lst = tmp; 
+		cmd->rdir_lst = tmp;
 	}
 	free(cmd);
 }
@@ -60,6 +60,8 @@ void	free_node(t_node *node)
 
 void	free_ast(t_node *ast)
 {
+	if (!ast)
+		return ;
 	if (ast->left)
 		free_ast(ast->left);
 	if (ast->right)

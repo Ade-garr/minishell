@@ -3,79 +3,93 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ade-garr <ade-garr@student.42.fr>          +#+  +:+       +#+         #
+#    By: vlugand- <vlugand-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/02/12 10:29:31 by user42            #+#    #+#              #
-#    Updated: 2021/04/20 12:11:46 by ade-garr         ###   ########.fr        #
+#    Created: 2020/10/14 17:58:20 by vlugand-          #+#    #+#              #
+#    Updated: 2021/07/05 16:52:31 by vlugand-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS += ./srcs/main.c
-SRCS += ./srcs/ft_lstadd_back.c
-SRCS += ./srcs/ft_lstlast.c
-SRCS += ./srcs/ft_lstnew.c
-SRCS += ./srcs/ft_lstclear.c
-SRCS += ./srcs/ft_lstsize.c
-SRCS += ./srcs/execute1.c
-SRCS += ./srcs/execute2.c
-SRCS += ./srcs/expansion.c
-SRCS += ./srcs/expansion2.c
-SRCS += ./srcs/ft_bzero.c
-SRCS += ./srcs/ft_calloc.c
-SRCS += ./srcs/utils.c
-SRCS += ./srcs/utils2.c
-SRCS += ./srcs/utils3.c
-SRCS += ./srcs/utils4.c
-SRCS += ./srcs/redirections.c
-SRCS += ./srcs/terminal.c
-SRCS += ./srcs/ft_isprint_safe.c
-SRCS += ./srcs/readline.c
-SRCS += ./srcs/readline2.c
-SRCS += ./srcs/readline3.c
-SRCS += ./srcs/ft_strlcpy.c
-SRCS += ./srcs/ft_strlen_safe.c
-SRCS += ./srcs/ft_strlen.c
-SRCS += ./srcs/ft_strncmp.c
-SRCS += ./srcs/ft_putstr_fd.c
-SRCS += ./srcs/ft_strdup.c
-SRCS += ./srcs/ft_strdup_safe.c
-SRCS += ./srcs/lexer.c
-SRCS += ./srcs/parser1.c
-SRCS += ./srcs/parser2.c
-SRCS += ./srcs/quotes.c
-SRCS += ./srcs/free_ast.c
-SRCS += ./srcs/print_lexer_parser.c
+NAME 		=	minishell
 
-OBJS	= ${SRCS:.c=.o}
+SRCS		= 	srcs/lexer.c\
+				srcs/parser1.c\
+				srcs/parser2.c\
+				srcs/utils_cond.c\
+				srcs/utils_env1.c\
+				srcs/utils_env2.c\
+				srcs/utils_misc.c\
+				srcs/utils_parsing.c\
+				srcs/utils_safe.c\
+				srcs/utils_termcaps.c\
+				srcs/free1.c\
+				srcs/free2.c\
+				srcs/expansion1.c\
+				srcs/expansion2.c\
+				srcs/expansion3.c\
+				srcs/execute1.c\
+				srcs/execute2.c\
+				srcs/execute3.c\
+				srcs/readline1.c\
+				srcs/readline2.c\
+				srcs/readline3.c\
+				srcs/redirections.c\
+				srcs/termcaps.c\
+				srcs/signal.c\
+				srcs/builtins.c\
+				srcs/builtin_cd.c\
+				srcs/builtin_cd2.c\
+				srcs/builtin_export.c\
+				srcs/builtin_exit1.c\
+				srcs/builtin_exit2.c\
+				srcs/builtin_env.c\
+				srcs/builtin_pwd.c\
+				srcs/builtin_unset.c\
+				srcs/builtin_echo.c\
+				srcs/heredoc.c\
+				srcs/str_cleanup.c\
+				srcs/init.c\
+				srcs/main.c
 
-NAME	= minishell
+CC			= 	gcc
+OBJS		= 	${SRCS:.c=.o}
+CFLAGS		= 	-Wall -Wextra -Werror
+LIBS		=	-L libft -lft
+RM			= 	rm -f
+LIBFT		=	libft/libft.a
 
-INCLUDES = ./includes/
+all:		${LIBFT} ${NAME}
 
-CC		= clang
+.c.o:
+			${CC} ${CFLAGS} -I includes -c $< -o ${<:.c=.o}
 
-CFLAGS	+= -Wall
-CFLAGS	+= -Wextra
-CFLAGS	+= -Werror
-
-HEADER = ${INCLUDES}minishell.h
-
-all:		${NAME}
+${LIBFT}:
+			@make -C libft
+			@echo "\033[0;36m\033[1mLibft is ready to use.\033[0m"
+			#For any change in libft please use "make re" with this Makefile or "make" on the Makefile located in ./libft/
 
 ${NAME}:	${OBJS}
-			${CC} ${CFLAGS} -I ${INCLUDES} ${OBJS} -o ${NAME} -lncurses
-			printf "\033[32m$@ is ready ! \n\033[0m"
+			${CC} ${CFLAGS} ${OBJS} -o ${NAME} ${LIBS} -lncurses
+			@echo "\033[0;32m\033[1mMinishell is now ready!\033[0m"
+			@echo ""
+			@echo "\033[92m███    ███ ██ ███    ██ ██ ███████ ██   ██ ███████ ██      ██      "
+			@echo "\033[93m████  ████ ██ ████   ██ ██ ██      ██   ██ ██      ██      ██      "
+			@echo "\033[91m██ ████ ██ ██ ██ ██  ██ ██ ███████ ███████ █████   ██      ██      "
+			@echo "\033[95m██  ██  ██ ██ ██  ██ ██ ██      ██ ██   ██ ██      ██      ██      "
+			@echo "\033[96m██      ██ ██ ██   ████ ██ ███████ ██   ██ ███████ ███████ ███████  \033[0mby ade-garr & vlugand-"
+			@echo ""
 
-${OBJS}: %.o: %.c ${HEADER}
-			${CC} ${CFLAGS} -I ${INCLUDES} -c $< -o $@
-			
-clean:
-			rm -f ${OBJS}
+clean:		
+			@make clean -C libft
+			${RM} ${OBJS}
+			@echo "\033[0;35m\033[1mCleaned all .o files.\033[0m"
 
-fclean:		clean
-			rm -f ${NAME}
+fclean:		
+			@make fclean -C libft
+			${RM} ${OBJS}
+			${RM} ${NAME}
+			@echo "\033[0;35m\033[1mCleaned all .o files and executable.\033[0m"
 
 re:			fclean all
 
-.PHONY:		all clean fclean re
-.SILENT:
+.PHONY:		all clean fclean re bonus
