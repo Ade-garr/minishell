@@ -1,6 +1,6 @@
-### Welcome to my minishell repository 👋
+# 📌 minishell 📌
 
-⭐️ The objective of minishell is to code a simple shell.<br>
+The objective of minishell is to code a simple shell.<br>
 
 <p align="center">
 	<img src="./minishell.gif" >
@@ -8,7 +8,7 @@
 
 Made with [valentinllpz](https://github.com/valentinllpz/minishell).
 
-## 💡 Usage
+## 🔑 How to
 
 ```
 make
